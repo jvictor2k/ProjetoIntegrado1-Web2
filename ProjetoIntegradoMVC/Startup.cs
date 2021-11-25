@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using ProjetoIntegradoMVC.Models;
 using ProjetoIntegradoMVC.Data;
+using ProjetoIntegradoMVC.Services;
 
 namespace ProjetoIntegradoMVC
 {
@@ -42,6 +43,7 @@ namespace ProjetoIntegradoMVC
                         builder.MigrationsAssembly("ProjetoIntegradoMVC")));
 
             services.AddScoped<SeedingService>();
+            services.AddScoped<SellerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
