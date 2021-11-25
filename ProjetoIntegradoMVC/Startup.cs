@@ -37,7 +37,8 @@ namespace ProjetoIntegradoMVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<ProjetoIntegradoMVCContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ProjetoIntegradoMVCContext")));
+                    options.UseMySql(Configuration.GetConnectionString("ProjetoIntegradoMVCContext"), builder =>
+                        builder.MigrationsAssembly("ProjetoIntegradoMVC")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
