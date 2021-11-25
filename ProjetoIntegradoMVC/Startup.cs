@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using ProjetoIntegradoMVC.Models;
 
 namespace ProjetoIntegradoMVC
 {
@@ -33,6 +35,9 @@ namespace ProjetoIntegradoMVC
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<ProjetoIntegradoMVCContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ProjetoIntegradoMVCContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
