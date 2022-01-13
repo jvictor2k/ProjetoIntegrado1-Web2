@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoIntegradoMVC.Models.ViewModels;
+using ProjetoIntegradoMVC.Models;
 
 namespace ProjetoIntegradoMVC.Controllers
 {
@@ -53,7 +54,6 @@ namespace ProjetoIntegradoMVC.Controllers
                 var corFonte = PdfSharpCore.Drawing.XBrushes.Black;
                 var textFormatter = new PdfSharpCore.Drawing.Layout.XTextFormatter(graphics);
                 var fonteSeller = new PdfSharpCore.Drawing.XFont("Arial", 12);
-                var fonteSales = new PdfSharpCore.Drawing.XFont("Arial", 12, PdfSharpCore.Drawing.XFontStyle.BoldItalic);
                 var fonteDepartment = new PdfSharpCore.Drawing.XFont("Arial", 12, PdfSharpCore.Drawing.XFontStyle.Bold);
 
                 var qtdPaginas = doc.PageCount;
@@ -62,13 +62,26 @@ namespace ProjetoIntegradoMVC.Controllers
                 var alturaTituloDetalhesY = 40;
                 var detalhes = new PdfSharpCore.Drawing.Layout.XTextFormatter(graphics);
 
-                detalhes.DrawString("Seller", fonteSeller, corFonte, new PdfSharpCore.Drawing.XRect(30, alturaTituloDetalhesY, page.Width, page.Height));
-                detalhes.DrawString("Sales", fonteSales, corFonte, new PdfSharpCore.Drawing.XRect(150, alturaTituloDetalhesY, page.Width, page.Height));
-                detalhes.DrawString("Department", fonteDepartment, corFonte, new PdfSharpCore.Drawing.XRect(270, alturaTituloDetalhesY, page.Width, page.Height));
+                detalhes.DrawString("Id", fonteDepartment, corFonte, new PdfSharpCore.Drawing.XRect(30, alturaTituloDetalhesY, page.Width, page.Height));
+                detalhes.DrawString("Date", fonteDepartment, corFonte, new PdfSharpCore.Drawing.XRect(100, alturaTituloDetalhesY, page.Width, page.Height));
+                detalhes.DrawString("Seller", fonteDepartment, corFonte, new PdfSharpCore.Drawing.XRect(170, alturaTituloDetalhesY, page.Width, page.Height));
+                detalhes.DrawString("Department", fonteDepartment, corFonte, new PdfSharpCore.Drawing.XRect(250, alturaTituloDetalhesY, page.Width, page.Height));
+                detalhes.DrawString("Amount", fonteDepartment, corFonte, new PdfSharpCore.Drawing.XRect(320, alturaTituloDetalhesY, page.Width, page.Height));
+                detalhes.DrawString("Status", fonteDepartment, corFonte, new PdfSharpCore.Drawing.XRect(390, alturaTituloDetalhesY, page.Width, page.Height));
 
                 var alturaDetalhesItens = 60;
 
+                List<SalesRecord> lista = new List<SalesRecord>();
 
+                foreach (var item in lista)
+                {
+                    textFormatter.DrawString(item.Id.ToString(), fonteSeller, corFonte, new PdfSharpCore.Drawing.XRect(30, alturaDetalhesItens, page.Width, page.Height));
+                    textFormatter.DrawString(item.Date.ToString(), fonteSeller, corFonte, new PdfSharpCore.Drawing.XRect(30, alturaDetalhesItens, page.Width, page.Height));
+                    textFormatter.DrawString(item.Seller.Name.ToString(), fonteSeller, corFonte, new PdfSharpCore.Drawing.XRect(30, alturaDetalhesItens, page.Width, page.Height));
+                    textFormatter.DrawString(item.Seller.Department.ToString(), fonteSeller, corFonte, new PdfSharpCore.Drawing.XRect(30, alturaDetalhesItens, page.Width, page.Height));
+                    textFormatter.DrawString(item.Amount.ToString(), fonteSeller, corFonte, new PdfSharpCore.Drawing.XRect(30, alturaDetalhesItens, page.Width, page.Height));
+                    textFormatter.DrawString(item.Status.ToString(), fonteSeller, corFonte, new PdfSharpCore.Drawing.XRect(30, alturaDetalhesItens, page.Width, page.Height));
+                }
 
                 using (MemoryStream stream = new MemoryStream())
                 {
